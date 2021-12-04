@@ -19,7 +19,7 @@ class CAcctions : public CClient
         int already_account(int);
         void balance_account(float);
         void remove_balance_account(float);
-        void account_stauts();
+        void account_stauts(int);
         void print_actions()
         {
             for(int i =0; i <= index; i++)
@@ -36,6 +36,20 @@ CAcctions :: CAcctions()
     actions = new CClient[n];
     index = 0;
     client_balance = 0.0;
+}
+
+void CAcctions :: account_stauts(int idd)
+{
+    for(int i=0; i < index; i++)
+    {
+        if(idd == actions[i].ID)
+        {
+            cout << "----> Estado de Cuenta <----" << endl;
+            cout << "Usuario: " << actions[i].name << endl;
+            cout << "ID: " << actions[i].ID << endl;
+            cout << "Dinero disponible: " << client_balance << endl;
+        }
+    }
 }
 
 void CAcctions :: balance_account(float deposit)

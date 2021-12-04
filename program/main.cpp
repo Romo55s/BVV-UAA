@@ -20,102 +20,105 @@ int main()
     int n = 5;
     CClient reg[n];
     CAcctions actions;
-	do
-	{
-        for(int i=0; i <= n; i++)
+    for(int i=0; i <= n; i++)
+    {
+        do
         {
-            system("cls");
-            cout << "---------> BVV-UAA [CAJERO] <---------" << endl;
-            cout << "[1] --> Registrarse" << endl;
-            cout << "[2] --> Cuenta ya existente" << endl;
-            cout << "[3] --> Salir" << endl;
-            cout << "Inserte la opcion deseada: ";
-            cin >> op;
-            
-            switch(op)
+            do
             {
-                case 1:
+                system("cls");
+                cout << "---------> BVV-UAA [CAJERO] <---------" << endl;
+                cout << "[1] --> Registrarse" << endl;
+                cout << "[2] --> Cuenta ya existente" << endl;
+                cout << "[3] --> Salir" << endl;
+                cout << "Inserte la opcion deseada: ";
+                cin >> op;
+            }while(op < 1 || op > 3);
+                switch(op)
                 {
-                    cout << "Inserte un nombre para su nueva cuenta: " << endl;
-                    char name[30];
-                    fflush(stdin);
-                    cin >> name;
-                    reg[i].set_name(name);
-                    reg[i].generate_ID();
-                    actions.register_client(reg[i]);
-                    break;
-                }
-                case 2:
-                {
-                    actions.print_actions();
-                    cout << "Inserta tu ID: " << endl;
-                    int id;
-                    cin >> id;
-                    if(actions.already_account(id) >= 0)
+                    case 1:
                     {
-                        //actions.print_actions();
-                        cout << "Sus datos son correctos? s / n" << endl;
-                        char res;
+                        cout << "Inserte un nombre para su nueva cuenta: " << endl;
+                        char name[30];
                         fflush(stdin);
-                        cin >> res;
-                        if(res == 's' || res == 'S')
+                        cin >> name;
+                        reg[i].set_name(name);
+                        reg[i].generate_ID();
+                        actions.register_client(reg[i]);
+                        break;
+                    }
+                    case 2:
+                    {
+                        actions.print_actions();
+                        cout << "Inserta tu ID: " << endl;
+                        int id;
+                        cin >> id;
+                        if(actions.already_account(id) >= 0)
                         {
-                            do
+                            //actions.print_actions();
+                            cout << "Sus datos son correctos? s / n" << endl;
+                            char res;
+                            fflush(stdin);
+                            cin >> res;
+                            if(res == 's' || res == 'S')
                             {
-                                system("cls");
-                                MainMenu();
-                                int mainOp;
-                                cin >> mainOp;
-
-                                switch(mainOp)
+                                do
                                 {
-                                    case 1:
+                                    do
                                     {
-                                        cout << "Inserte el monto a depostiar: ";
-                                        float deposit;
-                                        cin >> deposit;
-                                        actions.balance_account(deposit);
-                                        break;
-                                    }
-                                    case 2:
-                                    {
-                                        cout << "Inserte el monto a retirar: ";
-                                        float remove;
-                                        cin >> remove;
-                                        actions.remove_balance_account(remove);
-                                        break;
-                                    }
-                                    case 3:
-                                    {
-                                        break;
-                                    }
-                                    case 4:
-                                    {
-                                        break;
-                                    }
-                                    case 5:
-                                    {
-                                        break;
-                                    }
-                                }
-                                system("pause");
-                            }while(op != 5);
+                                        system("cls");
+                                        MainMenu();
+                                        cin >> op;
+                                    }while(op < 1 || op > 6);
+
+                                        switch(op)
+                                        {
+                                            case 1:
+                                            {
+                                                cout << "Inserte el monto a depostiar: ";
+                                                float deposit;
+                                                cin >> deposit;
+                                                actions.balance_account(deposit);
+                                                break;
+                                            }
+                                            case 2:
+                                            {
+                                                cout << "Inserte el monto a retirar: ";
+                                                float remove;
+                                                cin >> remove;
+                                                actions.remove_balance_account(remove);
+                                                break;
+                                            }
+                                            case 3:
+                                            {
+                                                break;
+                                            }
+                                            case 4:
+                                            {
+                                                actions.account_stauts(id);
+                                                break;
+                                            }
+                                            case 5:
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        system("pause");
+                                }while(op != 6);
+                            }else
+                            {
+                                cout << "Documento .txt con posibles soluciones" << endl;
+                            }
                         }else
                         {
-                            cout << "Documento .txt con posibles soluciones" << endl;
+                            cout << "ID no registrada!" << endl;
                         }
-                    }else
-                    {
-                        cout << "ID no registrada!" << endl;
+                        break;
                     }
-                    break;
                 }
-            }
-            system("pause");
-        }
-
-	}while(op != 3);
-
+                system("pause");
+        }while(op != 3);
+    }
 	return 0;
 }
 
